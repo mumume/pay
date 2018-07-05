@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.joinpay.common.HttpResponse;
+import com.joinpay.common.SysResponse;
 import com.joinpay.entity.SysUser;
 import com.joinpay.service.UserService;
 
@@ -20,15 +20,15 @@ public class UserController {
 	UserService userService;
 
 	@GetMapping("{id}")
-	public HttpResponse hello(@PathVariable Long id) {
+	public SysResponse hello(@PathVariable Long id) {
 		SysUser user = userService.get(id);
-		return HttpResponse.OK(user);
+		return SysResponse.OK(user);
 	}
 
 	@GetMapping("list")
-	public HttpResponse list() {
+	public SysResponse list() {
 		List<SysUser> users = userService.list();
-		return HttpResponse.OK(users);
+		return SysResponse.OK(users);
 	}
 
 }
