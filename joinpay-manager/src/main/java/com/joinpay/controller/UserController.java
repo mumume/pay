@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.joinpay.common.SysResponse;
 import com.joinpay.entity.SysUser;
+import com.joinpay.redis.RedisUtil;
 import com.joinpay.service.UserService;
 
 @RestController
@@ -18,10 +19,13 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	@Autowired
+	RedisUtil redisUtil;
 
 	@GetMapping("{id}")
 	public SysResponse hello(@PathVariable Long id) {
 		SysUser user = userService.get(id);
+		redisUtil.set(user.getName(), user);
 		return SysResponse.OK(user);
 	}
 
