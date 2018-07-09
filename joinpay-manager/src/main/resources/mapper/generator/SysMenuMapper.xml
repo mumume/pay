@@ -12,9 +12,11 @@
     <result column="order_num" property="orderNum" jdbcType="INTEGER" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="is_del" property="isDel" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    menu_id, parent_id, name, url, perms, type, icon, order_num, gmt_create, gmt_modified
+    menu_id, parent_id, name, url, perms, type, icon, order_num, gmt_create, gmt_modified, 
+    is_del
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -29,12 +31,12 @@
   <insert id="insert" parameterType="com.joinpay.entity.SysMenu" >
     insert into sys_menu (menu_id, parent_id, name, 
       url, perms, type, icon, 
-      order_num, gmt_create, gmt_modified
-      )
+      order_num, gmt_create, gmt_modified, 
+      is_del)
     values (#{menuId,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
       #{url,jdbcType=VARCHAR}, #{perms,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR}, 
-      #{orderNum,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
-      )
+      #{orderNum,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
+      #{isDel,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.joinpay.entity.SysMenu" >
     insert into sys_menu
@@ -69,6 +71,9 @@
       <if test="gmtModified != null" >
         gmt_modified,
       </if>
+      <if test="isDel != null" >
+        is_del,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="menuId != null" >
@@ -100,6 +105,9 @@
       </if>
       <if test="gmtModified != null" >
         #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -133,6 +141,9 @@
       <if test="gmtModified != null" >
         gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       </if>
+      <if test="isDel != null" >
+        is_del = #{isDel,jdbcType=BIT},
+      </if>
     </set>
     where menu_id = #{menuId,jdbcType=BIGINT}
   </update>
@@ -146,7 +157,8 @@
       icon = #{icon,jdbcType=VARCHAR},
       order_num = #{orderNum,jdbcType=INTEGER},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      is_del = #{isDel,jdbcType=BIT}
     where menu_id = #{menuId,jdbcType=BIGINT}
   </update>
 </mapper>

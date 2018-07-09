@@ -47,7 +47,7 @@
         </javaClientGenerator>
 
         <!-- 表配置 -->
-        <table tableName="sys_file" enableCountByExample="false" enableDeleteByExample="false"
+        <table tableName="sys_menu" enableCountByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" enableUpdateByExample="false">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
