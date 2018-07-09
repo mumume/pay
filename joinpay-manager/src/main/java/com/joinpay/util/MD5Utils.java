@@ -20,9 +20,9 @@ public class MD5Utils {
 				HASH_ITERATIONS).toHex();
 		return newPassword;
 	}
-	public static void main(String[] args) {
-		
-		System.out.println(MD5Utils.encrypt("admin", "admin"));
-	}
+//	public static void main(String[] args) {
+//		
+//		System.out.println(MD5Utils.encrypt("admin", "admin"));
+//	}
 
 }

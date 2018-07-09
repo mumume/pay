@@ -18,7 +18,6 @@ import com.joinpay.service.SessionService;
 /**
  * 待完善
  *
- * @author bootdo
  */
 @Service
 public class SessionServiceImpl implements SessionService {

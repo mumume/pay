@@ -23,6 +23,8 @@ public class SysMenu {
 
     private Date gmtModified;
 
+    private Boolean isDel;
+
     public Long getMenuId() {
         return menuId;
     }
@@ -101,5 +103,13 @@ public class SysMenu {
 
     public void setGmtModified(Date gmtModified) {
         this.gmtModified = gmtModified;
+    }
+
+    public Boolean getIsDel() {
+        return isDel;
+    }
+
+    public void setIsDel(Boolean isDel) {
+        this.isDel = isDel;
     }
 }

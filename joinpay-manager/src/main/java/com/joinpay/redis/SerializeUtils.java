@@ -9,10 +9,6 @@ import java.io.Serializable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * @author bootdo 1992lcg@163.com
- * @version V1.0
- */
 public class SerializeUtils {
 
     private static Logger logger = LoggerFactory.getLogger(SerializeUtils.class);

@@ -2,196 +2,232 @@ package com.joinpay.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class SysUser implements Serializable {
-    private static final long serialVersionUID = 1L;
-    private Long userId;
+	private static final long serialVersionUID = 1L;
+	//
+	private Long userId;
+	// 用户名
+	private String username;
+	// 用户真实姓名
+	private String name;
+	// 密码
+	private String password;
+	// 部门
+	private Long deptId;
 
-    private String username;
+	private String deptName;
+	// 邮箱
+	private String email;
+	// 手机号
+	private String mobile;
+	// 状态 0:禁用，1:正常
+	private Integer status;
+	// 创建用户id
+	private Long userIdCreate;
+	// 创建时间
+	private Date gmtCreate;
+	// 修改时间
+	private Date gmtModified;
+	// 角色
+	private List<Long> roleIds;
+	// 性别
+	private Long sex;
+	// 出身日期
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date birth;
+	// 图片ID
+	private Long picId;
+	// 现居住地
+	private String liveAddress;
+	// 爱好
+	private String hobby;
+	// 省份
+	private String province;
+	// 所在城市
+	private String city;
+	// 所在地区
+	private String district;
 
-    private String name;
+	public Long getUserId() {
+		return userId;
+	}
 
-    private String password;
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 
-    private Long deptId;
+	public String getUsername() {
+		return username;
+	}
 
-    private String email;
+	public void setUsername(String username) {
+		this.username = username == null ? null : username.trim();
+	}
 
-    private String mobile;
+	public String getName() {
+		return name;
+	}
 
-    private Byte status;
+	public void setName(String name) {
+		this.name = name == null ? null : name.trim();
+	}
 
-    private Long userIdCreate;
+	public String getPassword() {
+		return password;
+	}
 
-    private Date gmtCreate;
+	public void setPassword(String password) {
+		this.password = password == null ? null : password.trim();
+	}
 
-    private Date gmtModified;
+	public Long getDeptId() {
+		return deptId;
+	}
 
-    private Long sex;
+	public void setDeptId(Long deptId) {
+		this.deptId = deptId;
+	}
 
-    private Date birth;
+	public String getEmail() {
+		return email;
+	}
 
-    private Long picId;
+	public void setEmail(String email) {
+		this.email = email == null ? null : email.trim();
+	}
 
-    private String liveAddress;
+	public String getMobile() {
+		return mobile;
+	}
 
-    private String hobby;
+	public void setMobile(String mobile) {
+		this.mobile = mobile == null ? null : mobile.trim();
+	}
 
-    private String province;
+	public Integer getStatus() {
+		return status;
+	}
 
-    private String city;
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
-    private String district;
+	public Long getUserIdCreate() {
+		return userIdCreate;
+	}
 
-    public Long getUserId() {
-        return userId;
-    }
+	public void setUserIdCreate(Long userIdCreate) {
+		this.userIdCreate = userIdCreate;
+	}
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+	public Date getGmtCreate() {
+		return gmtCreate;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public void setGmtCreate(Date gmtCreate) {
+		this.gmtCreate = gmtCreate;
+	}
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
-    }
+	public Date getGmtModified() {
+		return gmtModified;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setGmtModified(Date gmtModified) {
+		this.gmtModified = gmtModified;
+	}
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
+	public Long getSex() {
+		return sex;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setSex(Long sex) {
+		this.sex = sex;
+	}
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
+	public Date getBirth() {
+		return birth;
+	}
 
-    public Long getDeptId() {
-        return deptId;
-    }
+	public void setBirth(Date birth) {
+		this.birth = birth;
+	}
 
-    public void setDeptId(Long deptId) {
-        this.deptId = deptId;
-    }
+	public Long getPicId() {
+		return picId;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setPicId(Long picId) {
+		this.picId = picId;
+	}
 
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
-    }
+	public String getLiveAddress() {
+		return liveAddress;
+	}
 
-    public String getMobile() {
-        return mobile;
-    }
+	public void setLiveAddress(String liveAddress) {
+		this.liveAddress = liveAddress == null ? null : liveAddress.trim();
+	}
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile == null ? null : mobile.trim();
-    }
+	public String getHobby() {
+		return hobby;
+	}
 
-    public Byte getStatus() {
-        return status;
-    }
+	public void setHobby(String hobby) {
+		this.hobby = hobby == null ? null : hobby.trim();
+	}
 
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
+	public String getProvince() {
+		return province;
+	}
 
-    public Long getUserIdCreate() {
-        return userIdCreate;
-    }
+	public void setProvince(String province) {
+		this.province = province == null ? null : province.trim();
+	}
 
-    public void setUserIdCreate(Long userIdCreate) {
-        this.userIdCreate = userIdCreate;
-    }
+	public String getCity() {
+		return city;
+	}
 
-    public Date getGmtCreate() {
-        return gmtCreate;
-    }
+	public void setCity(String city) {
+		this.city = city == null ? null : city.trim();
+	}
 
-    public void setGmtCreate(Date gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
+	public String getDistrict() {
+		return district;
+	}
 
-    public Date getGmtModified() {
-        return gmtModified;
-    }
+	public void setDistrict(String district) {
+		this.district = district == null ? null : district.trim();
+	}
 
-    public void setGmtModified(Date gmtModified) {
-        this.gmtModified = gmtModified;
-    }
+	public String getDeptName() {
+		return deptName;
+	}
 
-    public Long getSex() {
-        return sex;
-    }
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
 
-    public void setSex(Long sex) {
-        this.sex = sex;
-    }
+	public List<Long> getRoleIds() {
+		return roleIds;
+	}
 
-    public Date getBirth() {
-        return birth;
-    }
+	public void setRoleIds(List<Long> roleIds) {
+		this.roleIds = roleIds;
+	}
 
-    public void setBirth(Date birth) {
-        this.birth = birth;
-    }
+	@Override
+	public String toString() {
+		return "SysUser [userId=" + userId + ", username=" + username + ", name=" + name + ", password=" + password
+				+ ", deptId=" + deptId + ", deptName=" + deptName + ", email=" + email + ", mobile=" + mobile
+				+ ", status=" + status + ", userIdCreate=" + userIdCreate + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + ", roleIds=" + roleIds + ", sex=" + sex + ", birth=" + birth
+				+ ", picId=" + picId + ", liveAddress=" + liveAddress + ", hobby=" + hobby + ", province=" + province
+				+ ", city=" + city + ", district=" + district + "]";
+	}
 
-    public Long getPicId() {
-        return picId;
-    }
-
-    public void setPicId(Long picId) {
-        this.picId = picId;
-    }
-
-    public String getLiveAddress() {
-        return liveAddress;
-    }
-
-    public void setLiveAddress(String liveAddress) {
-        this.liveAddress = liveAddress == null ? null : liveAddress.trim();
-    }
-
-    public String getHobby() {
-        return hobby;
-    }
-
-    public void setHobby(String hobby) {
-        this.hobby = hobby == null ? null : hobby.trim();
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province == null ? null : province.trim();
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city == null ? null : city.trim();
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district == null ? null : district.trim();
-    }
 }

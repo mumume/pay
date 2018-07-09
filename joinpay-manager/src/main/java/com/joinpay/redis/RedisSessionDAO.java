@@ -12,10 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * @author bootdo 1992lcg@163.com
- * @version V1.0
- */
 public class RedisSessionDAO extends AbstractSessionDAO {
 
 	private static Logger logger = LoggerFactory.getLogger(RedisSessionDAO.class);

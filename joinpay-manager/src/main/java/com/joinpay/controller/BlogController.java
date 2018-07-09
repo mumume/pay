@@ -17,9 +17,6 @@ import com.joinpay.service.ContentService;
 import com.joinpay.util.DateUtils;
 import com.joinpay.util.PageUtils;
 
-/**
- * @author bootdo 1992lcg@163.com
- */
 @RequestMapping("/blog")
 @Controller
 public class BlogController {

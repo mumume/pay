@@ -31,6 +31,14 @@ public class SysResponse {
 
 	}
 
+	public static SysResponse error(int code, String message) {
+		return new SysResponse(message, code, null);
+	}
+
+	public static SysResponse error() {
+		return new SysResponse(Code.SystemError.getMessage(), Code.SystemError.getCode(), null);
+	}
+
 	public static SysResponse OK(Object object) {
 		return new SysResponse(Code.OK.getMessage(), Code.OK.getCode(), object);
 	}
@@ -92,4 +100,5 @@ public class SysResponse {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
 }

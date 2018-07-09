@@ -26,11 +26,13 @@ import com.joinpay.entity.SysDept;
 import com.joinpay.entity.SysRole;
 import com.joinpay.entity.SysUser;
 import com.joinpay.enums.Code;
+import com.joinpay.service.DictService;
 import com.joinpay.service.RoleService;
 import com.joinpay.service.UserService;
 import com.joinpay.util.MD5Utils;
 import com.joinpay.util.PageUtils;
 import com.joinpay.util.Query;
+import com.joinpay.vo.UserVO;
 
 @Controller
 @RequestMapping("/sys/user")
@@ -38,12 +40,10 @@ public class UserController extends BaseController {
 	private String prefix = "system/user";
 	@Autowired
 	UserService userService;
-	// @Autowired
-	// RedisCache redisCache;
 	@Autowired
 	RoleService roleService;
-	// @Autowired
-	// DictService dictService;
+	@Autowired
+	DictService dictService;
 
 	@RequiresPermissions("sys:user:user")
 	@GetMapping("")
@@ -58,7 +58,6 @@ public class UserController extends BaseController {
 
 		return SysResponse.OK(user);
 	}
-
 
 	@GetMapping("/list")
 	@ResponseBody
@@ -195,7 +194,7 @@ public class UserController extends BaseController {
 	 */
 	@PostMapping("/resetPwd")
 	@ResponseBody
-	SysResponse resetPwd(SysUser userVO) {
+	SysResponse resetPwd(UserVO userVO) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return SysResponse.create(Code.SystemError, "演示系统不允许修改,完整体验请部署程序");
 		}
@@ -218,7 +217,7 @@ public class UserController extends BaseController {
 	@RequiresPermissions("sys:user:resetPwd")
 	@PostMapping("/adminResetPwd")
 	@ResponseBody
-	SysResponse adminResetPwd(SysUser userVO) {
+	SysResponse adminResetPwd(UserVO userVO) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return SysResponse.create(Code.SystemError, "演示系统不允许修改,完整体验请部署程序");
 		}
@@ -244,14 +243,14 @@ public class UserController extends BaseController {
 		return prefix + "/userTree";
 	}
 
-	// @GetMapping("/personal")
-	// String personal(Model model) {
-	// SysUser userDO = userService.get(getUserId());
-	// model.addAttribute("user",userDO);
-	// model.addAttribute("hobbyList",dictService.getHobbyList(userDO));
-	// model.addAttribute("sexList",dictService.getSexList());
-	// return prefix + "/personal";
-	// }
+	@GetMapping("/personal")
+	String personal(Model model) {
+		SysUser userDO = userService.get(getUserId());
+		model.addAttribute("user", userDO);
+		model.addAttribute("hobbyList", dictService.getHobbyList(userDO));
+		model.addAttribute("sexList", dictService.getSexList());
+		return prefix + "/personal";
+	}
 
 	@ResponseBody
 	@PostMapping("/uploadImg")

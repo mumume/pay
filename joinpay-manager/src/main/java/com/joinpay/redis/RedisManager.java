@@ -1,9 +1,5 @@
 package com.joinpay.redis;
 
-/**
- * @author bootdo 1992lcg@163.com
- * @version V1.0
- */
 
 import java.util.Set;
 
