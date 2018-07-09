@@ -4,17 +4,25 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 @Configuration
 @PropertySource("classpath:config/redis.properties")
 public class RedisConfig {
+
+	@Value("${redis.hostName}")
+	private String host;
+
+	@Value("${redis.port}")
+	private Integer port;
+
+	@Value("${redis.timeout}")
+	private Integer timeout;
+
+	@Value("${redis.password}")
+	private String password;
 
 	@Value("${redis.maxIdle}")
 	private Integer maxIdle;
@@ -73,37 +81,50 @@ public class RedisConfig {
 		return jedisPoolConfig;
 	}
 
+	@Bean
+	public JedisPool jedisPool(JedisPoolConfig jedisPoolConfig) {
+		if (password != null && !"".equals(password)) {
+			return new JedisPool(new JedisPoolConfig(), host, port, timeout, password);
+		} else if (timeout != 0) {
+			return new JedisPool(new JedisPoolConfig(), host, port, timeout);
+		} else {
+			return new JedisPool(new JedisPoolConfig(), host, port);
+		}
+	}
 	/**
 	 * 单机版配置
 	 */
-	@Bean
-	@SuppressWarnings("deprecation")
-	public JedisConnectionFactory JedisConnectionFactory(JedisPoolConfig jedisPoolConfig) {
-		JedisConnectionFactory JedisConnectionFactory = new JedisConnectionFactory(jedisPoolConfig);
-		// 连接池
-		JedisConnectionFactory.setPoolConfig(jedisPoolConfig);
-		// IP地址
-		JedisConnectionFactory.setHostName("192.168.2.220");
-		// 端口号
-		JedisConnectionFactory.setPort(6379);
-		// 如果Redis设置有密码
-		// JedisConnectionFactory.setPassword(password);
-		// 客户端超时时间单位是毫秒
-		JedisConnectionFactory.setTimeout(5000);
-		return JedisConnectionFactory;
-	}
+	// @Bean
+	// @SuppressWarnings("deprecation")
+	// public JedisConnectionFactory JedisConnectionFactory(JedisPoolConfig
+	// jedisPoolConfig) {
+	// JedisConnectionFactory JedisConnectionFactory = new
+	// JedisConnectionFactory(jedisPoolConfig);
+	// // 连接池
+	// JedisConnectionFactory.setPoolConfig(jedisPoolConfig);
+	// // IP地址
+	// JedisConnectionFactory.setHostName("192.168.2.220");
+	// // 端口号
+	// JedisConnectionFactory.setPort(6379);
+	// // 如果Redis设置有密码
+	// // JedisConnectionFactory.setPassword(password);
+	// // 客户端超时时间单位是毫秒
+	// JedisConnectionFactory.setTimeout(5000);
+	// return JedisConnectionFactory;
+	// }
 
 	/**
 	 * 实例化 RedisTemplate 对象
 	 *
 	 * @return
 	 */
-	@Bean
-	public RedisTemplate<String, Object> functionDomainRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
-		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
-		initDomainRedisTemplate(redisTemplate, redisConnectionFactory);
-		return redisTemplate;
-	}
+	// @Bean
+	// public RedisTemplate<String, Object>
+	// functionDomainRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
+	// RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+	// initDomainRedisTemplate(redisTemplate, redisConnectionFactory);
+	// return redisTemplate;
+	// }
 
 	/**
 	 * 设置数据存入 redis 的序列化方式,并开启事务
@@ -111,25 +132,27 @@ public class RedisConfig {
 	 * @param redisTemplate
 	 * @param factory
 	 */
-	private void initDomainRedisTemplate(RedisTemplate<String, Object> redisTemplate, RedisConnectionFactory factory) {
-		// 如果不配置Serializer，那么存储的时候缺省使用String，如果用User类型存储，那么会提示错误User can't cast to
-		// String！
-		redisTemplate.setKeySerializer(new StringRedisSerializer());
-		redisTemplate.setHashKeySerializer(new StringRedisSerializer());
-		redisTemplate.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
-		redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
-		// 开启事务
-		redisTemplate.setEnableTransactionSupport(true);
-		redisTemplate.setConnectionFactory(factory);
-	}
+	// private void initDomainRedisTemplate(RedisTemplate<String, Object>
+	// redisTemplate, RedisConnectionFactory factory) {
+	// // 如果不配置Serializer，那么存储的时候缺省使用String，如果用User类型存储，那么会提示错误User can't cast to
+	// // String！
+	// redisTemplate.setKeySerializer(new StringRedisSerializer());
+	// redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+	// redisTemplate.setHashValueSerializer(new
+	// GenericJackson2JsonRedisSerializer());
+	// redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+	// // 开启事务
+	// redisTemplate.setEnableTransactionSupport(true);
+	// redisTemplate.setConnectionFactory(factory);
+	// }
 
 	/**
 	 * 注入封装RedisTemplate
 	 */
-	@Bean(name = "redisUtil")
-	public RedisUtil redisUtil(RedisTemplate<String, Object> redisTemplate) {
-		RedisUtil redisUtil = new RedisUtil();
-		redisUtil.setRedisTemplate(redisTemplate);
-		return redisUtil;
-	}
+	// @Bean(name = "redisUtil")
+	// public RedisUtil redisUtil(RedisTemplate<String, Object> redisTemplate) {
+	// RedisUtil redisUtil = new RedisUtil();
+	// redisUtil.setRedisTemplate(redisTemplate);
+	// return redisUtil;
+	// }
 }
