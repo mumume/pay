@@ -10,8 +10,17 @@ import com.joinpay.entity.SysUser;
 @Mapper
 public interface UserMapper {
 
-	List<SysUser> list();
-
 	List<SysUser> list(Map<String, Object> map);
-}
 
+	int count(Map<String, Object> map);
+
+	int save(SysUser user);
+
+	int update(SysUser user);
+
+	int remove(Long userId);
+
+	int batchRemove(Long[] userIds);
+
+	Long[] listAllDept();
+}
