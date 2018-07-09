@@ -27,8 +27,11 @@ spring:
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
     # 合并多个DruidDataSource的监控数据
     #useGlobalDataSourceStat: true 
-    
-mybatis:
+shiro: 
+  cacheType: redis
+  tomcatTimeout: 30
+  
+mybatis: 
   configuration:
     map-underscore-to-camel-case: true
   mapper-locations: mapper/**/*Mapper.xml
