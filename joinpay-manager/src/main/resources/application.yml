@@ -27,10 +27,10 @@ spring:
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
     # 合并多个DruidDataSource的监控数据
     #useGlobalDataSourceStat: true 
-    
   thymeleaf:
     mode: LEGACYHTML5
     cache: false
+    
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
@@ -45,4 +45,4 @@ mybatis:
 #[弃用]cacheType: ehcache 
 
 joinpay:
-  upload-path: D:\upload
+  upload-path: D:/upload/
