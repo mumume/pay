@@ -1,6 +1,7 @@
 package com.joinpay.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import com.joinpay.entity.BlogContent;
 import com.joinpay.service.ContentService;
 import com.joinpay.util.DateUtils;
 import com.joinpay.util.PageUtils;
+import com.joinpay.util.Query;
 
 @RequestMapping("/blog")
 @Controller
@@ -31,10 +33,10 @@ public class BlogController {
 	@ResponseBody
 	@GetMapping("/open/list")
 	public PageUtils opentList(@RequestParam Map<String, Object> params) {
-		// Query query = new Query(params);
-		// List<BlogContent> bContentList = bContentService.list(query);
-		// int total = bContentService.count(query);
-		// PageUtils pageUtils = new PageUtils(bContentList, total);
+		 Query query = new Query(params);
+		 List<BlogContent> bContentList = bContentService.list(query);
+		 int total = bContentService.count(query);
+		 PageUtils pageUtils = new PageUtils(bContentList, total);
 		return null;
 	}
 
